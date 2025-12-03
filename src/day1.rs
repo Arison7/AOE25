@@ -11,6 +11,7 @@ pub fn crack_passord() -> std::io::Result<()> {
     let path = "./input_files/day1.txt";
     let mut addition = true;
     let mut number : i32 = 1;
+    let mut starting_dial;
     
     // read file line by line 
     for line in read_to_string(path).unwrap().lines() {
@@ -28,6 +29,8 @@ pub fn crack_passord() -> std::io::Result<()> {
                     number =  c.to_digit(10).unwrap() as i32 + number*10; 
                 },
                 3 => {
+                    // Add the full rotations to count
+                    count += number / 10;
                     // we only care about the last two digits 
                     // if number is 112
                     // we only need to get the x12 as 12
@@ -39,14 +42,21 @@ pub fn crack_passord() -> std::io::Result<()> {
                 }
             }
         }
-        // Correct a over shoot
+        starting_dial = dial;
         dial += if addition {1} else { -1 } * number;
         if dial < 0 {
             dial += 100;
+            // Correct for if we have started at 0
+            // to avoid double counting it 
+            if starting_dial != 0 {
+                count += 1;
+            }
         }else if dial > 99 {
             dial -= 100;
+            count += 1;
+        }else {
+            count += if dial == 0 {1} else { 0 };
         }
-        count += if dial == 0 {1} else { 0 };
     }
 
     print!("The password is {:?}",count);
