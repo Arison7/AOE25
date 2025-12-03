@@ -1,8 +1,9 @@
 use day1::crack_passord;
+use day2::part1;
 
 mod day1;
-
+mod day2;
 
 fn main() {
-    crack_passord();
+    part1();
 }
