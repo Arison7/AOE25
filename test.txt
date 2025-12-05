@@ -1,0 +1,23 @@
+
+9811
+
+2378
+
+1892
+
+
+1232
+
+818181911112111
+
+
+max_before_Max 8
+
+max 9
+max_index = 6
+
+max_after_Max = 2
+
+
+
+
